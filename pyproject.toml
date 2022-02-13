@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "xerrion-tts-service-lambda"
+version = "0.1.1"
+description = "AWS Lambda function to generate text-to-speech from text using the AWS Polly API"
+authors = ["Xerrion <lasse@xerrion.dk>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+boto3 = "^1.20.54"
+
+[tool.poetry.dev-dependencies]
+black = "^22.1.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
