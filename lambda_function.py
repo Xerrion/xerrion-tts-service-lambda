@@ -16,10 +16,9 @@ def lambda_handler(event, context):
     :return: The response from the Polly API.
     """
     # Get the parameters from the event
-    json_body = json.loads(event["body"])
-    input_text = json_body["inputText"]
-    voice_id = json_body["voiceId"]
-    selected_interpreter = json_body["textType"]
+    input_text = event["inputText"]
+    voice_id = event["voiceId"]
+    selected_interpreter = event["textType"]
     types_of_interpretation = ["ssml", "text"]
     output_text = None
 
@@ -33,11 +32,11 @@ def lambda_handler(event, context):
                     f"<speak><phoneme alphabet='ipa' ph='{input_text}' /></speak>"
                 )
             elif selected_interpreter == "text":
-                output_text = f"<speak>{input_text}</speak>"
+                output_text = f"{input_text}"
         else:
             raise ValueError("Selected interpreter is not valid")
     except ValueError as ve:
-        return {"statusCode": 400, "error": ve}
+        return {"statusCode": 400, "error": str(ve)}
 
     try:
         # Early return if the input text or voice id is empty
@@ -55,9 +54,9 @@ def lambda_handler(event, context):
         )
     # Handle exceptions
     except exceptions.ClientError as ce:
-        return {"statusCode": 400, "error": ce}
+        return {"statusCode": 400, "error": str(ce)}
     except ValueError as ve:
-        return {"statusCode": 400, "error": ve}
+        return {"statusCode": 400, "error": str(ve)}
 
     # Return the content type and the base64-encoded audio stream as a string in the body of the response
     response = {
@@ -67,4 +66,4 @@ def lambda_handler(event, context):
     }
 
     # Return the response
-    return json.dumps(response)
+    return response
