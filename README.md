@@ -9,4 +9,4 @@ If you post to the function, it will return a JSON object with status code 200 a
 ## Licenses
 
 - The Lambda function code itself is released under the MIT license
-- The boto3 package which is used extensively in the code, is released under the [Apache 2.0 License](https://aws.amazon.com/apache-2-0/).
+- The boto3 package which is used extensively in the code, is released under the [Apache 2.0 License](https://aws.amazon.com/apache-2-0/). <br/>There has been made no changes to any the code in boto3.
