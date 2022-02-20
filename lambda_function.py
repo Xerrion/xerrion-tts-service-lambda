@@ -32,7 +32,7 @@ def lambda_handler(event, context):
                     f"<speak><phoneme alphabet='ipa' ph='{input_text}' /></speak>"
                 )
             elif selected_interpreter == "text":
-                output_text = f"{input_text}"
+                output_text = input_text
         else:
             raise ValueError("Selected interpreter is not valid")
     except ValueError as ve:
